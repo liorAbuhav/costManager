@@ -2,7 +2,7 @@ const BSON = require('bson');
 const db = require("../models");
 const User = db.users;
 
-// Create and Save a new Tutorial
+// Create and Save a new User
 exports.create = (req, res) => {
   // Validate request
   if (!req.body.id) {
@@ -10,7 +10,7 @@ exports.create = (req, res) => {
     return;
   }
 
-  // Create a Tutorial
+  // Create a User
   const user = new User({
     id: req.body.id,
     first_name: req.body.first_name,
@@ -19,7 +19,7 @@ exports.create = (req, res) => {
     marital_status: req.body.marital_status
   });
 
-  // Save Tutorial in the database
+  // Save User in the database
   user
     .save(user)
     .then(data => {
