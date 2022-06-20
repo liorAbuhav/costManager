@@ -8,6 +8,9 @@ module.exports = app => {
 
     // Find Costs by category
     router.get("/:category", costs.FindByCategory);
+
+    // Find Costs by category
+    router.get("/:year/:month", costs.FindByMonth);
   
     app.use("/api/costs", router);
   };

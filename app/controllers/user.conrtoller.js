@@ -15,7 +15,7 @@ exports.create = (req, res) => {
     id: req.body.id,
     first_name: req.body.first_name,
     last_name: req.body.last_name,
-    birthday: req.body.birthday,
+    birthday: Date(req.body.birthday),
     marital_status: req.body.marital_status
   });
 
@@ -86,27 +86,27 @@ exports.update = (req, res) => {
           message: "Error updating User with id=" + id
         });
       });
-  };
+};
   
-  // Delete a User with the specified id in the request
-  exports.delete = (req, res) => {
-    const id = req.params.id;
-  
-    User.findByIdAndRemove(id, { useFindAndModify: false })
-      .then(data => {
-        if (!data) {
-          res.status(404).send({
-            message: `Cannot delete User with id=${id}. Maybe User was not found!`
-          });
-        } else {
-          res.send({
-            message: "Tutorial was deleted successfully!"
-          });
-        }
-      })
-      .catch(err => {
-        res.status(500).send({
-          message: "Could not delete Tutorial with id=" + id
+// Delete a User with the specified id in the request
+exports.delete = (req, res) => {
+const id = req.params.id;
+
+User.findByIdAndRemove(id, { useFindAndModify: false })
+    .then(data => {
+    if (!data) {
+        res.status(404).send({
+        message: `Cannot delete User with id=${id}. Maybe User was not found!`
         });
-      });
-  };
+    } else {
+        res.send({
+        message: "Tutorial was deleted successfully!"
+        });
+    }
+    })
+    .catch(err => {
+    res.status(500).send({
+        message: "Could not delete Tutorial with id=" + id
+    });
+    });
+};

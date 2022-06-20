@@ -3,11 +3,9 @@ const { ObjectId } = require("bson");
 module.exports = mongoose => {
     var schema = mongoose.Schema(
       {
-        user_id: ObjectId,
-        description: String,
-        category: String,
-        sum: Number,
-        date: Date
+          name: String,
+          count: Number,
+          sum: Number
       }
     );
   
@@ -16,7 +14,7 @@ module.exports = mongoose => {
       return object;
     });
   
-    const Cost = mongoose.model("cost", schema);
-    return Cost;
+    const Category = mongoose.model("category", schema);
+    return Category;
   };
   
