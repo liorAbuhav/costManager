@@ -9,6 +9,5 @@ db.url = dbConfig.url;
 db.users = require("./user.model.js")(mongoose);
 db.costs = require("./cost.model.js")(mongoose);
 db.categories = require("./category.model.js")(mongoose)
-db.tutorials = require("./tutorial.model.js")(mongoose);
 
 module.exports = db;

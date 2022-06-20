@@ -77,7 +77,7 @@ exports.update = (req, res) => {
       .then(data => {
         if (!data) {
           res.status(404).send({
-            message: `Cannot update User with id=${id}. Maybe Tutorial was not found!`
+            message: `Cannot update User with id=${id}. Maybe User was not found!`
           });
         } else res.send({ message: "User was updated successfully." });
       })
@@ -100,13 +100,13 @@ User.findByIdAndRemove(id, { useFindAndModify: false })
         });
     } else {
         res.send({
-        message: "Tutorial was deleted successfully!"
+        message: "User was deleted successfully!"
         });
     }
     })
     .catch(err => {
     res.status(500).send({
-        message: "Could not delete Tutorial with id=" + id
+        message: "Could not delete User with id=" + id
     });
     });
 };
