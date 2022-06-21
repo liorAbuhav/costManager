@@ -32,7 +32,11 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to costManager application." });
 });
 
-require("./app/routes/turorial.routes")(app);
+require("./app/routes/user.routes")(app);
+
+require("./app/routes/cost.routes")(app);
+
+require("./app/routes/category.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
