@@ -18,11 +18,11 @@ module.exports = app => {
     // Find Costs by id
     router.get("/user/:id", costs.FindByUser);
 
-    // // Update a Cost with id
-    // router.put("/:id", costs.update);
+    // Update a Cost with id
+    router.put("/:id", costs.update);
 
-    // // Delete a Cost with id
-    // router.delete("/:id", costs.delete);
+    // Delete a Cost with id
+    router.delete("/:id", costs.delete);
   
     app.use("/api/costs", router);
   };

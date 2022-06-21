@@ -1,6 +1,7 @@
 const BSON = require('bson');
 const db = require("../models");
 const User = db.users;
+const Cost = db.costs;
 
 // Create and Save a new User
 exports.create = (req, res) => {
@@ -120,6 +121,22 @@ User.findByIdAndRemove(id, { useFindAndModify: false })
         message: `Cannot delete User with id=${id}. Maybe User was not found!`
         });
     } else {
+        // remove related costs
+        Cost.deleteMany({user_id: id})
+        .then(data => {
+          if (!data) {
+              res.status(404).send({
+              message: `Cannot delete Cost with id=${id}. Maybe Cost was not found!`
+              });
+          }
+        })
+        .catch(err => {
+        res.status(500).send({
+            message: "Could not delete Cost with id=" + id
+        });
+        });
+
+
         res.send({
         message: "User was deleted successfully!"
         });
