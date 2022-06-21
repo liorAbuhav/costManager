@@ -10,27 +10,48 @@ exports.create = (req, res) => {
     return;
   }
 
-  // Create a User
-  const user = new User({
-    id: req.body.id,
-    first_name: req.body.first_name,
-    last_name: req.body.last_name,
-    birthday: Date(req.body.birthday),
-    marital_status: req.body.marital_status
-  });
+  User.find({id: req.body.id})
+  .then(data => {
+    if (!data)
+      res.status(404).send({ message: "Not found Cost with category " + category });
+    else {
+      if (data.length === 0) {
+        // create a new user
 
-  // Save User in the database
-  user
-    .save(user)
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while creating the User."
-      });
-    });
+          // Create a User
+          const user = new User({
+            id: req.body.id,
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            birthday: Date(req.body.birthday),
+            marital_status: req.body.marital_status
+          });
+
+          // Save User in the database
+          user
+            .save(user)
+            .then(data => {
+              res.send(data);
+            })
+            .catch(err => {
+              res.status(500).send({
+                message:
+                  err.message || "Some error occurred while creating the User."
+              });
+            });
+      }
+      else {
+        res
+        .status(400)
+        .send({ message: "Canno't create user with existed ID" });
+      }
+    };
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .send({ message: "Error retrieving Cost with category=" + category });
+  });
 };
 
 // Retrieve all Usres from the database.

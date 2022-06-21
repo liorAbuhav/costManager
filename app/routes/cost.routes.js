@@ -6,11 +6,23 @@ module.exports = app => {
     // Create a new Cost
     router.post("/", costs.create);
 
-    // Find Costs by category
-    router.get("/:category", costs.FindByCategory);
+    // Find all Costs
+    router.get("/", costs.findAll);
 
     // Find Costs by category
-    router.get("/:year/:month", costs.FindByMonth);
+    router.get("/category/:category", costs.FindByCategory);
+
+    // Find Costs by year and month
+    router.get("/date/:year/:month", costs.FindByMonth);
+
+    // Find Costs by id
+    router.get("/user/:id", costs.FindByUser);
+
+    // // Update a Cost with id
+    // router.put("/:id", costs.update);
+
+    // // Delete a Cost with id
+    // router.delete("/:id", costs.delete);
   
     app.use("/api/costs", router);
   };
