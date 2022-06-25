@@ -117,6 +117,53 @@ exports.FindByMonth = (req, res) => {
       });
 };
 
+// Find Costs by user & month
+exports.FindByUserAndMonth = (req, res) => {
+  const pYear = +req.params.year;
+  const pMonth = +req.params.month;
+  const userId = req.params.id;
+
+  
+  Cost.aggregate(
+      [
+        {
+          $project: {
+              _id: 1,
+              user_id: 1,
+              description: 1,
+              category: 1,
+              sum: 1,
+              date: 1,
+              year: { $year: "$date" },
+              month: { $month: "$date" }
+          }
+        },
+        {
+          $match: {
+              year: pYear,
+              month: pMonth,
+              user_id: BSON.ObjectId(userId)
+          }
+        },
+        {
+          $project: {
+              year: 0,
+              month: 0
+          }
+        }
+      ]
+   ).then(data => {
+      if (!data)
+        res.status(404).send({ message: "Not found Cost with month and year "});
+      else res.send(data);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .send({ message: "Error retrieving Cost with month and year"});
+    });
+};
+
 // Find Costs by user
 exports.FindByUser = (req, res) => {
   const userId = req.params.id;
