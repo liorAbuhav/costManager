@@ -15,6 +15,9 @@ module.exports = app => {
     // Find Costs by year and month
     router.get("/date/:year/:month", costs.FindByMonth);
 
+    // Find Costs by year and month
+    router.get("/dateAndUser/:id/:year/:month", costs.FindByUserAndMonth);
+
     // Find Costs by id
     router.get("/user/:id", costs.FindByUser);
 
