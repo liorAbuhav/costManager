@@ -30,21 +30,6 @@ exports.create = (cost) => {
                     throw "Some error occurred while creating the Category.";
                 });
         }
-        else {
-            // Existing category
-            // updated = {...data[0]._doc};
-
-            // Category.findByIdAndUpdate(data[0]._doc._id, updated, { useFindAndModify: false })
-            // .then(data => {
-            // if (!data) {
-            //     throw "Some error occurred while creating the Category."
-            // } else  "Category was updated successfully.";
-            // })
-            // .catch(err => {
-            //     throw "Error updating Category with id=" + id
-            // });
-
-        }
   })
   .catch(err => {
     throw "Error retrieving Category"

@@ -38,9 +38,6 @@ exports.create = (req, res) => {
       });
     });
 
-    // categories.create(costData).catch(err => {
-    //     res.status(500).send({err})
-    // });
 };
 
 // Retrieve all Usres from the database.
